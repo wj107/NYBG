@@ -45,5 +45,10 @@ insert<-function(vec,insert.point,insert.vec){
 length(dat)%%64->last
 dat<-c(dat,rep("",64-last))
 dat<-matrix(dat,ncol=64,byrow=T)
+
+dat.names<-dat[1,]
+dat<-as.data.frame(dat[-1,])
+names(dat)<-dat.names
+
 dat
 }

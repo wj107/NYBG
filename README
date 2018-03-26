@@ -1,0 +1,21 @@
+###########################################################
+####### NYBG Plant Database
+###########################################################
+
+#--------------------------------------
+#--------input & clean the data
+#--------------------------------------
+
+
+
+#------------v0.81 has------------------
+#------------with the database d/l-ed (link provided)
+#------------source "NYBGdat.R", then run NYBG(N)->dat
+#------------it will read the first "N" entries of NYBG data
+#------------into a data frame in R
+
+#------------v0.81+ needs:
+#------------convert each column to appropriate class (factor, time, numeric, etc)
+#------------start/stop capabilities, so d/l doesn't alway begin at 1st entry of NYBG data: NYBG(M,N) function call
+
+
