@@ -61,11 +61,6 @@ insert<-function(vec,insert.point,insert.vec){
 #---end blocks!
 }
 
-
-#length(dat)%%64->last
-#dat<-c(dat,rep("",64-last))
-
-
 #----------------------
 #---clean data!
 
@@ -76,8 +71,9 @@ insert<-function(vec,insert.point,insert.vec){
 
 #---------convert variables to appropriate type!
 	#--what columns are numeric?  factors?
-		fac<-c(33)
-		num<-c(42,43)
+		fac<-c(12,21,31,33,55:61,63)
+			#---column 38:  figure out how to extract elevation data!!!
+		num<-c(24,25,42,43,50)
 	#---convert columns via loop
 		for (i in fac) dat[,i]<-factor(dat[,i])
 		for (i in num) dat[,i]<-as.numeric(dat[,i])
