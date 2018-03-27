@@ -4,51 +4,78 @@
 ###d/l data from https://www.gbif.org/dataset/d415c253-4d61-4459-9d25-4015b9084fb0
 ###unzip, file 'occurence.txt' has the data
 
+#-------function call:  start at data entry M, read until entry N
+	NYBG<-function(
+		#---how many lines to read??
+			lines=1e2,
+		#---what line to begin reading from?  default at 0			
+			start=0){
 
-NYBG<-function(N){
+#----read first line for header (read quietly!!!)
+	scan("occurrence.txt",what="character",sep="\t",n=64,quiet=T)->dat.names
 
-##read data
-	scan("occurrence.txt",what="character",sep="\t",n=N)->dat
+#----if start=0, change start (since dat.names is really start==0)
+	if(start==0) start<-1
 
+#----read data (skip 'start' lines, nlines = 'lines'
+	scan("occurrence.txt",what="character",sep="\t",skip=start,nlines=lines)->dat
 
-###identify 'block text'
+#----identify 'block text' within scan
 	grep("\t",dat)->block.index
+#----how many blocks??
 	length(block.index)->Nblock
 
-if(!Nblock==0){
+#---only if you have blocks.... unpack them!!
+	if(!Nblock==0){
 
-###create list of blockdata
-dat[block.index]->blocks
-
-	lapply(blocks,function(x) gsub("\n","\t",x))->blocks
-	lapply(blocks,function(x) unlist(strsplit(x,"\t")) )->blocks
+	#----amass all blocks in a list
+		dat[block.index]->blocks
+	#----replace all line breaks with tabs
+		lapply(blocks,function(x) gsub("\n","\t",x))->blocks
+	#----split blocks at tabs
+		lapply(blocks,function(x) unlist(strsplit(x,"\t")) )->blocks
+	#----how many entries in each block?
+		sapply(blocks,length)-1->block.length
 	
-	sapply(blocks,length)-1->block.length
+	#---figure out where to add each block into the main data
+		#---total number of blocked entries, across all blocks
+			block.index.add<-cumsum(block.length)
+		#---size of blocks tells us how much to 'shift' the main data... start at 0 (first block doesn't shift anything)
+			block.index.add<-c(0,block.index.add[-Nblock])
+		#---block index = where to add the data after shifting
+			block.index<-block.index+block.index.add	
 	
-	block.index.add<-cumsum(block.length)
-	block.index.add<-c(0,block.index.add[-Nblock])
+#--------'insert' subroutine----------------
+#--------for inserting blocks to 'main' data
+#-------------------------------------------
 
-block.index<-block.index+block.index.add	
-
-###'insert' subroutine
 insert<-function(vec,insert.point,insert.vec){
 	vec1<-vec[1:(insert.point-1)]
 	vec2<-vec[(insert.point+1):length(vec)]
 	out<-c(vec1,insert.vec,vec2)
 	out}
 
-	
-####set loop:
+#----insert each of the blocks at the given block index.  loop through all blocks.
 	for (i in 1:Nblock)  insert(dat,block.index[i],blocks[[i]])->dat
+
+#---end blocks!
 }
 
-length(dat)%%64->last
-dat<-c(dat,rep("",64-last))
-dat<-matrix(dat,ncol=64,byrow=T)
 
-dat.names<-dat[1,]
-dat<-as.data.frame(dat[-1,])
-names(dat)<-dat.names
+#length(dat)%%64->last
+#dat<-c(dat,rep("",64-last))
 
-dat
+
+#----------------------
+#---clean data!
+
+	#---organize data in matrix form
+		dat<-matrix(dat,ncol=64,byrow=T)
+	#---save as data.frame
+		dat<-as.data.frame(dat,stringsAsFactors=F)
+	#----now bring in the names
+		names(dat)<-dat.names
+
+	#----OUTPUT!!!	
+		dat
 }

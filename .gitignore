@@ -1,7 +1,7 @@
 ####data, metadata stays put.
 *.txt
 *.xml
-
+*.RData
 
 ####swap files!!!
 *.swp

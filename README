@@ -8,14 +8,13 @@
 
 
 
-#------------v0.81 has------------------
+#------------v0.83 has------------------
 #------------with the database d/l-ed (link provided)
-#------------source "NYBGdat.R", then run NYBG(N)->dat
-#------------it will read the first "N" entries of NYBG data
+#------------source "NYBGdat.R", then run NYBG(N,s)->dat
+#------------it will read the first "N" lines of NYBG data, starting at line "s"
 #------------into a data frame in R
 
-#------------v0.81+ needs:
+#------------v0.83+ needs:
 #------------convert each column to appropriate class (factor, time, numeric, etc)
-#------------start/stop capabilities, so d/l doesn't alway begin at 1st entry of NYBG data: NYBG(M,N) function call
 
-
+#------------troubleshooting:  something's up on row 481948.... how to adjust when reading in the data???
