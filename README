@@ -1,3 +1,11 @@
+##Accessing the NYBG Virtual Herbarium
+
+The New York Botanical Garden has a tremendous database of specimens available online.  Why not access this data into R for easy data analysis?  
+The raw data is available in a text file; not ideal for analysis.  Running this little R script in the directory with the database text file allows
+you to access a given number of rows of data, and input it directly into R as a data frame.
+
+
+
 ###########################################################
 ####### NYBG Plant Database
 ###########################################################
