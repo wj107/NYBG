@@ -8,13 +8,13 @@
 
 
 
-#------------v0.83 has------------------
+#------------v0.84 has------------------
 #------------with the database d/l-ed (link provided)
 #------------source "NYBGdat.R", then run NYBG(N,s)->dat
 #------------it will read the first "N" lines of NYBG data, starting at line "s"
 #------------into a data frame in R
 
-#------------v0.83+ needs:
-#------------convert each column to appropriate class (factor, time, numeric, etc)
+#------------v0.84+ needs:
+#------------complete info on converting each column to appropriate class (factor, time, numeric, etc)
 
 #------------troubleshooting:  something's up on row 481948.... how to adjust when reading in the data???

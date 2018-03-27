@@ -73,6 +73,15 @@ insert<-function(vec,insert.point,insert.vec){
 		dat<-matrix(dat,ncol=64,byrow=T)
 	#---save as data.frame
 		dat<-as.data.frame(dat,stringsAsFactors=F)
+
+#---------convert variables to appropriate type!
+	#--what columns are numeric?  factors?
+		fac<-c(33)
+		num<-c(42,43)
+	#---convert columns via loop
+		for (i in fac) dat[,i]<-factor(dat[,i])
+		for (i in num) dat[,i]<-as.numeric(dat[,i])
+
 	#----now bring in the names
 		names(dat)<-dat.names
 
