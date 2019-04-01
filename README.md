@@ -13,13 +13,13 @@ The text file with the raw database information can be downloaded from the
 
 Run the R script: `source("NYBG.R")` to create a function `NYBG`.  This function takes two arguments; the number of specimens from the database to read, and which specimen to begin
 from.  For example, `NYBG(100, 200)->dat`  would read 100 specimens from the database, starting with the 200th database entry, and save the information
-as a data frame 'dat' in R.
+as a data frame `dat` in R.
 
 Note that some entries in the database have 'blocks' of text, where dozens or more entries are mistakenly crammed into one single entry.  So, in
 reality, `NYBG(100,200)` might end up taking 100+ specimens from the database.
 
 ### What's next
 
-I have a hunch that I might be able to use the `awk` utility to allow for more powerful searching of this data.  I'm just getting set up with with `auk` package to access [eBird](https://ebird.org/home) data; as I gain familiarity with that, I'll consider if some of that functionality might serve for this dataset.
+I have a hunch that I might be able to use the `awk` utility to allow for more powerful searching of this data.  [I'm just getting set up](https://twitter.com/Grop_Birding/status/1112772466441682944) with with `auk` package to access [eBird](https://ebird.org/home) data; as I gain familiarity with that, I'll consider if some of that functionality might serve for this dataset.
 
 
